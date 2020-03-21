@@ -16,4 +16,7 @@ export class Location {
 
   @Column({ length: 30 })
   public gpsCoordinates: string;
+
+  @ManyToOne(type => Company, company => company.id)
+  public company: Company;
 }

@@ -20,7 +20,9 @@ export class Company {
   @Column()
   public image: string;
 
-  @OneToMany({ length: 16 })
-  public locationID: string;
+  @OneToMany(type => Location, location => location.id)
+  public location: Location[];
 
+  @OneToMany(type => JobOffer, jobOffer => jobOffer.id)
+  public jobOffers: JobOffer[];
 }

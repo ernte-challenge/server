@@ -19,4 +19,8 @@ export class Company {
 
   @Column()
   public image: string;
+
+  @OneToMany({ length: 16 })
+  public locationID: string;
+
 }

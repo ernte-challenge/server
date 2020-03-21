@@ -5,6 +5,9 @@ export class JobOffer {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
+  @ManyToOne({ length: 100 })
+  public companyId: string;
+
   @Column({ length: 100 })
   public typeOfWork: string;
 

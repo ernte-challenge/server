@@ -1,5 +1,13 @@
 import {Connection, createConnection} from 'typeorm';
-import {User, UserSession} from '../models';
+import {
+  Company,
+  CompanyImage,
+  CompanySession,
+  JobOffer,
+  Location,
+  User,
+  UserSession,
+} from '../models';
 
 export interface DatabaseConfiguration {
   type: 'postgres' | 'mysql' | 'mssql';
@@ -15,7 +23,15 @@ export class DatabaseProvider {
     const { type, host, port, username, password, database } = databaseConfiguration;
     return createConnection({
       type, host, port, username, password, database,
-      entities: [User, UserSession],
+      entities: [
+        Company,
+        CompanyImage,
+        CompanySession,
+        JobOffer,
+        Location,
+        User,
+        UserSession,
+      ],
       autoSchemaSync: true,
       synchronize: true
     } as any);

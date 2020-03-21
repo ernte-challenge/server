@@ -7,6 +7,16 @@ export class CompanyService {
     const company = await getRepository(Company).findOne(companyId);    
     return company;
   }
+  
+  public async getAll(): Promise<Company[]> {
+    const company = await getRepository(Company).find();    
+    return company;
+  }
+  
+  public async findByName(name: string): Promise<Company[] | undefined> {
+    const company = await getRepository(Company).find({ where: { name: name } });    
+    return company;
+  }
 
   public async create(company: Company): Promise<Company | string> {
 	if (company.name == null){

@@ -17,7 +17,7 @@ export class UserService {
 	}
 	if (user.password == null){
 		return "Password cannot be empty";
-	}	
+	}
 	
     const user = await getRepository(User).save(user);    
     return user;

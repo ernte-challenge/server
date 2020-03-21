@@ -1,6 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
-import { JobOffer } from './jobOffer';
-import { Location } from './location';
+import { JobOffer, Location, CompanyImage } from '.';
 
 @Entity()
 export class Company {
@@ -19,12 +18,12 @@ export class Company {
   @Column({ length: 60 })
   public password: string;
 
-  @Column()
-  public image: string;
+  @OneToMany(type => CompanyImage, companyImage => companyImage.company)
+  public images: CompanyImage[];
 
-  @OneToMany(type => Location, location => location.id)
+  @OneToMany(type => Location, location => location.company)
   public location: Location[];
 
-  @OneToMany(type => JobOffer, jobOffer => jobOffer.id)
+  @OneToMany(type => JobOffer, jobOffer => jobOffer.company)
   public jobOffers: JobOffer[];
 }

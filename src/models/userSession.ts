@@ -6,7 +6,7 @@ export class UserSession {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
-  @ManyToOne(type => User, user => user.id, { nullable: false })
+  @ManyToOne(type => User, user => user.id, { nullable: false, onDelete: 'CASCADE', })
   public user: string;
 
   @Column("timestamp")

@@ -1,17 +1,15 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
-import {User} from "./User";
+import {Company} from ".";
 
 @Entity()
-export class Image {
+export class CompanyImage {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
   @Column({ length: 255 })
   public fileName: string;
 
-  @Column({ length: 100 })
-  public companyId: string;
-  
-  @ManyToOne(type => User, user => user.images)
-  public user: User;
+  @ManyToOne(type => Company, company => company.id)
+  public company: string;
+
 }

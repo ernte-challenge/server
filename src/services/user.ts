@@ -8,13 +8,16 @@ export class UserService {
     return user;
   }
 
-  public async create(user: User): Promise<User> {
-	if (name == null){
-		return null;
+  public async create(user: User): Promise<User | string> {
+	if (user.name == null){
+		return "Name cannot be empty!";
 	}
-	if (emailAddress == null){
-		return null;
+	if (user.emailAddress == null){
+		return "eMail cannot be empty";
 	}
+	if (user.password == null){
+		return "Password cannot be empty";
+	}	
 	
     const user = await getRepository(User).save(user);    
     return user;

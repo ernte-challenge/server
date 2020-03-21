@@ -6,7 +6,6 @@ export class CompanySession {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
-  @ManyToOne(type => Company, company => company.id)
-  @Column('uuid')
+  @ManyToOne(type => Company, company => company.id, { nullable: false, onDelete: 'CASCADE' })
   public company: string
 }

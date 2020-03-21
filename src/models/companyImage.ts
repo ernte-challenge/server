@@ -9,7 +9,7 @@ export class CompanyImage {
   @Column({ length: 255 })
   public fileName: string;
 
-  @ManyToOne(type => Company, company => company.id)
+  @ManyToOne(type => Company, company => company.id, { nullable: false, onDelete: 'CASCADE' })
   public company: string;
 
 }

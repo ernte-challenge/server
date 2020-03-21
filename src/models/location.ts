@@ -18,6 +18,6 @@ export class Location {
   @Column({ length: 30 })
   public gpsCoordinates: string;
 
-  @ManyToOne(type => Company, company => company.id)
+  @ManyToOne(type => Company, company => company.id, { nullable: false, onDelete: 'CASCADE' })
   public company: Company;
 }

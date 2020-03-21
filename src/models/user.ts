@@ -8,6 +8,9 @@ export class User {
   @Column({ length: 100 })
   public name: string;
 
+  @Column({ length: 1 })
+  public sex: string;
+
   @Column({ length: 30 })
   public phoneNumber: string;
 

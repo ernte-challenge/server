@@ -1,5 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
-import {Image} from "./Image";
+import {UserSession} from ".";
 
 @Entity()
 export class User {
@@ -23,7 +23,7 @@ export class User {
 
   @Column()
   public image: string;
-  
-  @OneToMany(type => Image, image => image.user)
-  public images: Image[];
+
+  @OneToMany(type => UserSession, userSession => userSession.user)
+  userSessions: UserSession[];
 }

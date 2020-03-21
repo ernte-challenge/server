@@ -1,5 +1,5 @@
-import {ExampleController} from './exampleController';
+import UserController from './user';
 
 export const CONTROLLERS = [
-  new ExampleController()
+  new UserController()
 ];

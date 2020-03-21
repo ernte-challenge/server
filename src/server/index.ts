@@ -5,6 +5,11 @@ import {CONTROLLERS} from '../controller';
 
 export class Server implements HttpServer {
   private restify: RestifyServer;
+  private prefix: string = '';
+
+  public setPrefix(prefix: string) {
+    this.prefix = prefix;
+  }
 
   public get(url: string, requestHandler: RequestHandler): void {
     this.addRoute('get', url, requestHandler);
@@ -23,8 +28,7 @@ export class Server implements HttpServer {
   }
 
   private addRoute(method: 'get' | 'post' | 'put' | 'del', url: string, requestHandler: RequestHandler): void {
-    this.restify[method](url, requestHandler);
-    console.log(`Added route ${method.toUpperCase()} ${url}`);
+    this.restify[method](`${this.prefix}${url}`, requestHandler);
   }
 
   public start(port: number): void {
@@ -38,6 +42,10 @@ export class Server implements HttpServer {
   }
 
   private addControllers(): void {
-    CONTROLLERS.forEach(controller => controller.initialize(this));
+    CONTROLLERS.forEach(controller => {
+      // Prefix vor jedem initialize resetten, um unerwartete Sideeffects zu verhindern
+      this.prefix = '';
+      controller.initialize(this)
+    });
   }
 }

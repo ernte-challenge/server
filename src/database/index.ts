@@ -11,31 +11,13 @@ export interface DatabaseConfiguration {
 }
 
 export class DatabaseProvider {
-  private static connection: Connection;
-  private static configuration: DatabaseConfiguration;
-
-  public static configure(databaseConfiguration: DatabaseConfiguration): void {
-    DatabaseProvider.configuration = databaseConfiguration;
-  }
-
-  public static async getConnection(): Promise<Connection> {
-    if (DatabaseProvider.connection) {
-      return DatabaseProvider.connection;
-    }
-
-    if (!DatabaseProvider.configuration) {
-      throw new Error('DatabaseProvider is not configured yet.');
-    }
-
-    const { type, host, port, username, password, database } = DatabaseProvider.configuration;
-    DatabaseProvider.connection = await createConnection({
+  public static initialize(databaseConfiguration: DatabaseConfiguration): Promise<Connection> {
+    const { type, host, port, username, password, database } = databaseConfiguration;
+    return createConnection({
       type, host, port, username, password, database,
       entities: [User, UserSession],
-      logging: true,
       autoSchemaSync: true,
       synchronize: true
     } as any);
-
-    return DatabaseProvider.connection;
   }
 }

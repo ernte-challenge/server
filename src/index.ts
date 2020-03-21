@@ -4,7 +4,7 @@ import {Server} from './server/index';
 import 'reflect-metadata';
 import {DatabaseProvider} from './database/index';
 
-DatabaseProvider.configure({
+DatabaseProvider.initialize({
   type: process.env.DATABASE_TYPE as any || 'postgres',
   database: process.env.DATABASE_NAME || 'erntechallenge',
   username: process.env.DATABASE_USERNAME || 'postgres',

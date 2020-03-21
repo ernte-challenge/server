@@ -1,13 +1,11 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, ManyToMany} from 'typeorm';
 import { Company } from './company';
+import { User } from './user';
 
 @Entity()
 export class JobOffer {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
-
-  @ManyToOne(type => Company, company => company.id)
-  public company: Company;
 
   @Column({ length: 100 })
   public typeOfWork: string;
@@ -29,4 +27,8 @@ export class JobOffer {
 
   @Column()
   public salary: number;
+  
+  @ManyToOne(type => Company, company => company.jobOffers)
+  public company: Company;
+  
 }

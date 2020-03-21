@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import {Server} from './server/index';
 import 'reflect-metadata';
 import {DatabaseProvider} from './database/index';

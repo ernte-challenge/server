@@ -1,40 +1,37 @@
-import {Example} from '../models/example';
+import {User} from '../models';
 import {DatabaseProvider} from '../database/index';
 
 export class ExampleService {
-  public async getById(id: number): Promise<Example> {
+  public async getById(id: number): Promise<User> {
     const connection = await DatabaseProvider.getConnection();
-    return await connection.getRepository(Example).findOne(id);
+    return await connection.getRepository(User).findOne(id);
   }
 
-  public async create(customer: Example): Promise<Example> {
+  public async create(customer: User): Promise<User> {
     // Normally DTO !== DB-Entity, so we "simulate" a mapping of both
-    const newCustomer = new Example();
-    newCustomer.firstName = customer.firstName;
-    newCustomer.lastName = customer.lastName;
+    const newCustomer = new User();
+    newCustomer.name = customer.name;
 
     const connection = await DatabaseProvider.getConnection();
-    return await connection.getRepository(Example).save(newCustomer);
+    return await connection.getRepository(User).save(newCustomer);
   }
 
-  public async list(): Promise<Example[]> {
+  public async list(): Promise<User[]> {
     const connection = await DatabaseProvider.getConnection();
-    return await connection.getRepository(Example).find();
+    return await connection.getRepository(User).find();
   }
 
-  public async update(customer: Example): Promise<Example> {
+  public async update(customer: User): Promise<User> {
     console.log(customer);
     const connection = await DatabaseProvider.getConnection();
-    const repository = connection.getRepository(Example);
+    const repository = connection.getRepository(User);
     const entity = await repository.findOne(customer.id);
-    entity.firstName = customer.firstName;
-    entity.lastName = customer.lastName;
     return await repository.save(entity);
   }
 
   public async delete(id: number): Promise<void> {
     const connection = await DatabaseProvider.getConnection();
-    await connection.getRepository(Example).delete(id);
+    await connection.getRepository(User).delete(id);
   }
 }
 

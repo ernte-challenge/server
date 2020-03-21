@@ -1,5 +1,5 @@
 import {Connection, createConnection} from 'typeorm';
-import {Example} from '../models/example';
+import {User, UserSession} from '../models';
 
 export interface DatabaseConfiguration {
   type: 'postgres' | 'mysql' | 'mssql';
@@ -30,7 +30,8 @@ export class DatabaseProvider {
     const { type, host, port, username, password, database } = DatabaseProvider.configuration;
     DatabaseProvider.connection = await createConnection({
       type, host, port, username, password, database,
-      entities: [Example],
+      entities: [User, UserSession],
+      logging: true,
       autoSchemaSync: true,
       synchronize: true
     } as any);

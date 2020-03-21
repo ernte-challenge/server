@@ -20,6 +20,7 @@
   "dependencies": {
     "@types/node": "^13.9.2",
     "@types/restify": "^8.4.2",
+    "bcrypt": "^4.0.1",
     "dotenv": "^8.2.0",
     "knex": "^0.20.12",
     "nodemon": "^2.0.2",

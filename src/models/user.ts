@@ -22,6 +22,9 @@ export class User {
   public password: string;
 
   @Column()
+  public voluntary: boolean;
+
+  @Column()
   public image: string;
   
   @OneToMany(type => Image, image => image.user)

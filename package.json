@@ -4,7 +4,8 @@
   "description": "Backend für das Ernte-Challenge-Projekt",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf build && tsc",
+    "start": "nodemon --exec ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/ernte-challenge/server/issues"
   },
-  "homepage": "https://github.com/ernte-challenge/server#readme"
+  "homepage": "https://github.com/ernte-challenge/server#readme",
+  "dependencies": {
+    "@types/node": "^13.9.2",
+    "@types/restify": "^8.4.2",
+    "knex": "^0.20.12",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "reflect-metadata": "^0.1.13",
+    "restify": "^8.5.1",
+    "ts-node": "^8.7.0",
+    "typeorm": "^0.2.24",
+    "typescript": "^3.8.3"
+  }
 }

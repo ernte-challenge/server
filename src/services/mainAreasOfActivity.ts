@@ -4,6 +4,11 @@ import {getRepository} from 'typeorm';
 
 export class MainAreasOfActivityService {
 
+  public async getMainAreasOfActivityById(id: string): Promise<MainAreasOfActivity | undefined> {
+    const mainAreasOfActivity = await getRepository(MainAreasOfActivity).findOne(id);
+    return mainAreasOfActivity;
+  }
+
   public async createMainAreasOfActivity(name: string, location: string): Promise<MainAreasOfActivity> {
 		if (!name || location) {
 			throw new Error('MissingParameter');

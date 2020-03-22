@@ -1,4 +1,4 @@
-import {Location} from '../models';
+import {Location, MainAreasOfActivity, WhatYouGet, SearchedProfile} from '../models';
 import {getRepository} from 'typeorm';
 
 export class LocationService {
@@ -25,6 +25,11 @@ export class LocationService {
 
    public async getLocationById(id: string): Promise<Location | undefined> {
      const location = await getRepository(Location).findOne(id);
+     //const mainAreasOfActivity = await getRepository(MainAreasOfActivity).find({ where: { location: id} });
+     //const whatYouGet = await getRepository(WhatYouGet).find({ where: { location: id} });
+     //const searchedProfile = await getRepository(SearchedProfile).find({ where: { location: id} });
+
+
      return location;
    }
 

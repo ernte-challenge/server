@@ -4,6 +4,11 @@ import {getRepository} from 'typeorm';
 
 export class SearchedProfileService {
 
+  public async getSearchedProfileById(id: string): Promise<SearchedProfile | undefined> {
+    const searchedProfile = await getRepository(SearchedProfile).findOne(id);
+    return searchedProfile;
+  }
+
   public async createSearchedProfile(name: string, location: string): Promise<SearchedProfile> {
 		if (!name || location) {
 			throw new Error('MissingParameter');

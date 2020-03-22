@@ -45,6 +45,9 @@ export class Location {
   @Column({ length: 100 })
   public street: string;
 
+  @OneToMany(type => MainAreasOfActivity, mainAreasOfActivity => mainAreasOfActivity.mainAreasOfActivity)
+  mainAreasOfActivity: MainAreasOfActivity[];
+
   @ManyToOne(type => Company, company => company.id, { nullable: false, onDelete: 'CASCADE' })
   public company: Company;
 }

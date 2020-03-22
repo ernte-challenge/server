@@ -6,3 +6,5 @@ export * from './jobOffer';
 export * from './location';
 export * from './companyImage';
 export * from './mainAreasOfActivity';
+export * from './searchedProfile';
+export * from './whatYouGet';

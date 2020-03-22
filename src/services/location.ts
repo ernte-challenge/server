@@ -24,14 +24,14 @@ export class LocationService {
   //whatYouGet: string[]
 
    public async getLocationById(id: string): Promise<Location | undefined> {
-     const location = await getRepository(Location).findOne(locationId);
+     const location = await getRepository(Location).findOne(id);
      return location;
    }
 
 
 
   public async create(name: string, whatToDoSubline: string, usersNeeded: number, payedPerHour: number, bannerImageSrc: string,
-    bannerImageDescription: string, locationPhoneNumber: string, city: string, zipCode: string, houseNumber: string, street: string, gpsCoordinates: string;): Promise<Location | string> {
+    bannerImageDescription: string, locationPhoneNumber: string, city: string, zipCode: string, houseNumber: string, street: string, gpsCoordinates: string): Promise<Location | string> {
 	if (!name || !whatToDoSubline || !city || !gpsCoordinates || !usersNeeded) {
 			throw new Error('MissingParameter');
 	}

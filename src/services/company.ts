@@ -1,4 +1,5 @@
 import {Company} from '../models';
+import {hashText} from '../util/crypt';
 import {getRepository} from 'typeorm';
 
 export class CompanyService {
@@ -19,7 +20,7 @@ export class CompanyService {
   // }
 	//
   public async create(name: string, phoneNumber: string, emailAddress: string, password: string): Promise<Company | string> {
-	if (!name || !lastName || !phoneNumber || !emailAddress || !password) {
+	if (!name || !phoneNumber || !emailAddress || !password) {
 			throw new Error('MissingParameter');
 	}
 	const cryptedPassword = await hashText(password);
@@ -28,7 +29,7 @@ export class CompanyService {
 	company.phoneNumber = phoneNumber;
 	company.emailAddress = emailAddress;
 	company.password = cryptedPassword;
-    
+
 	const savedCompany = await getRepository(Company).save(company);
     return savedCompany;
   }

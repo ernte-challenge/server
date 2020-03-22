@@ -8,14 +8,20 @@ export class LocationService {
   //   return location;
   // }
 	//
-  // public async create(location: Location): Promise<Location | string> {
-	// if (location.gpsCoordinates == null){
-	// 	return "Coordinates missing!";
-	// }
-	//
-  //   const location = await getRepository(Location).save(location);
-  //   return location;
-  // }
+  
+  public async create(name: street, zipCode: string, city: string, gpsCoordinates: string): Promise<Location | string> {
+	if (!city || !gpsCoordinates) {
+			throw new Error('MissingParameter');
+	}
+	const location = new Location();
+	location.street = street;
+	location.zipCode = zipCode;
+	location.city = city;
+	location.gpsCoordinates = gpsCoordinates;
+    
+	const savedLocation = await getRepository(Location).save(location);
+    return savedLocation;
+  }
 	//
   // public async update(location: Location): Promise<Location> {
   //   const location = await getRepository(Location).save(location);

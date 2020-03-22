@@ -17,7 +17,9 @@ export default class UserController implements Controller {
       if (existingUser) {
         throw new Error('EmailAddressAlreadyInUse');
       }
-      await UserService.createUser(firstName, lastName, emailAddress, password);
+      const user = await UserService.createUser(firstName, lastName, emailAddress, password);
+      const sessionId = await SessionService.createSessionForUser(user);
+      (res as any).setCookie('SessionId', sessionId);
       res.send(200);
     });
 
@@ -35,13 +37,14 @@ export default class UserController implements Controller {
         throw new Error('WrongPassword');
       }
       const sessionId = await SessionService.createSessionForUser(existingUser);
-      res.send({
-        sessionId,
-      });
+      (res as any).setCookie('SessionId', sessionId);
+      res.send(200);
     });
 
     httpServer.post('/logout', async (req: Request, res: Response): Promise<any> => {
       await SessionService.deleteSession(req);
+      (res as any).clearCookie('SessionId');
+
       res.send(200);
     });
 

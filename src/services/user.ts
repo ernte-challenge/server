@@ -4,10 +4,10 @@ import {hashText, validateText} from '../util/crypt';
 
 export class UserService {
 	public getUserByEmailAddress(emailAddress: string): Promise<User> {
-	  return getRepository(User).findOne({ emailAddress });
+	  return getRepository(User).findOne({ emailAddress: emailAddress.toLowerCase() });
 	}
 
-  public async createUser(firstName: string, lastName: string, emailAddress: string, password: string): Promise<User | string> {
+  public async createUser(firstName: string, lastName: string, emailAddress: string, password: string): Promise<User> {
 		if (!firstName || !lastName || !emailAddress || !password) {
 			throw new Error('MissingParameter');
 		}
@@ -15,7 +15,7 @@ export class UserService {
 		const user = new User();
 		user.firstName = firstName;
 		user.lastName = lastName;
-		user.emailAddress = emailAddress;
+		user.emailAddress = emailAddress.toLowerCase();
 		user.password = cryptedPassword;
     const savedUser = await getRepository(User).save(user);
     return savedUser;

@@ -1,5 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
-import { Company } from './company';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm';
+import { Company, MainAreasOfActivity } from '.';
 
 @Entity()
 export class Location {
@@ -45,8 +45,8 @@ export class Location {
   @Column({ length: 100 })
   public street: string;
 
-  @OneToMany(type => MainAreasOfActivity, mainAreasOfActivity => mainAreasOfActivity.mainAreasOfActivity)
-  mainAreasOfActivity: MainAreasOfActivity[];
+  // @OneToMany(type => MainAreasOfActivity, mainAreasOfActivity => mainAreasOfActivity.id)
+  // mainAreasOfActivity: MainAreasOfActivity[];
 
   @ManyToOne(type => Company, company => company.id, { nullable: false, onDelete: 'CASCADE' })
   public company: Company;

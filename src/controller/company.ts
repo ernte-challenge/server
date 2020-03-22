@@ -2,12 +2,22 @@ import {Controller} from './controller';
 import {HttpServer} from '../server/httpServer';
 import {Request, Response} from 'restify';
 import ImageService from '../services/image';
+import CompanyService from '../services/company';
 
 export default class CompanyController implements Controller {
   public initialize(httpServer: HttpServer): void {
     httpServer.setPrefix('/company');
     httpServer.post('/register', async (req: Request, res: Response): Promise<any> => {
-
+      if (!req.body) {
+        throw new Error();
+      }
+      const {emailAddress, name, password} = req.body;
+      // const existingUser = await CompanyService.getCompanyByEmailAddress(emailAddress);
+      // if (existingUser) {
+      //   throw new Error('EmailAddressAlreadyInUse');
+      // }
+      // await UserService.createUser(firstName, lastName, emailAddress, password);
+      res.send(200);
     });
     httpServer.post('/login', async (req: Request, res: Response): Promise<any> => {
       // const customer = await exampleService.getById(req.params.id);

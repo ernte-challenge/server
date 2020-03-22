@@ -2,7 +2,7 @@ import {Controller} from './controller';
 import {HttpServer} from '../server/httpServer';
 import {Request, Response} from 'restify';
 
-export default class LocationController implements Controller {
+export default class JobController implements Controller {
   public initialize(httpServer: HttpServer): void {
     httpServer.setPrefix('/job');
     httpServer.get('s', async (req: Request, res: Response): Promise<any> => {

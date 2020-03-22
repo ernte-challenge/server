@@ -18,6 +18,9 @@ export class Location {
   @Column()
   public usersNeeded: number;
 
+  @Column({ length: 30 })
+  public gpsCoordinates: string;
+
   @Column()
   public payedPerHour: number;
 
@@ -41,9 +44,6 @@ export class Location {
 
   @Column({ length: 100 })
   public street: string;
-
-  @Column({ length: 30 })
-  public gpsCoordinates: string;
 
   @ManyToOne(type => Company, company => company.id, { nullable: false, onDelete: 'CASCADE' })
   public company: Company;

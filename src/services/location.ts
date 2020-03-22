@@ -3,11 +3,32 @@ import {getRepository} from 'typeorm';
 
 export class LocationService {
 
-  // public async getLocation(id: string): Promise<Location> {
-  //   const location = await getRepository(Location).findOne(locationId);
-  //   return location;
-  // }
-	//
+
+  //export interface FarmLocation {
+  //id: string;
+  //name: string;
+  //whatToDoSubline: string;
+  //usersRegistered: number;
+  //usersNeeded: number;
+  //distance: number;
+  //payedPerHour: number;
+  //bannerImageSrc: string;
+  //bannerImageDescription: string;
+  //locationPhoneNumber: string;
+  //city: string,
+  //zipCode: string
+  //houseNumber: string,
+  //street: string,
+  //mainAreasOfActivity: string[]
+  //searchedProfile: string[]
+  //whatYouGet: string[]
+
+   public async getLocationById(id: string): Promise<Location | undefined> {
+     const location = await getRepository(Location).findOne(locationId);
+     return location;
+   }
+
+
 
   public async create(name: string, whatToDoSubline: string, usersNeeded: number, payedPerHour: number, bannerImageSrc: string,
     bannerImageDescription: string, locationPhoneNumber: string, city: string, zipCode: string, houseNumber: string, street: string, gpsCoordinates: string;): Promise<Location | string> {
@@ -17,6 +38,7 @@ export class LocationService {
 	const location = new Location();
 	location.name = name;
 	location.whatToDoSubline = whatToDoSubline;
+  location.usersRegistered = 0;
 	location.usersNeeded = usersNeeded;
   location.payedPerHour = payedPerHour;
   location.bannerImageSrc = bannerImageSrc;

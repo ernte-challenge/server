@@ -9,7 +9,7 @@ export class LocationService {
   // }
 	//
   
-  public async create(name: street, zipCode: string, city: string, gpsCoordinates: string): Promise<Location | string> {
+  public async create(street: string, zipCode: string, city: string, gpsCoordinates: string): Promise<Location | string> {
 	if (!city || !gpsCoordinates) {
 			throw new Error('MissingParameter');
 	}

@@ -1,6 +1,7 @@
 import {HttpServer} from './httpServer';
 import {RequestHandler, Server as RestifyServer, Request, Response, Next} from 'restify';
 import * as restify from 'restify';
+import * as CookieParser from 'restify-cookies';
 import {CONTROLLERS} from '../controller';
 
 const ErrorHandler = (requestHandler: Function) => async (req: Request, res: Response, next: Next) => {
@@ -46,6 +47,7 @@ export class Server implements HttpServer {
     this.restify = restify.createServer();
     this.restify.use(restify.plugins.queryParser());
     this.restify.use(restify.plugins.bodyParser());
+    this.restify.use(CookieParser.parse);
 
     this.addControllers();
 

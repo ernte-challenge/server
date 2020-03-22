@@ -3,6 +3,7 @@ import {HttpServer} from '../server/httpServer';
 import {Request, Response} from 'restify';
 import ImageService from '../services/image';
 import UserService from '../services/user';
+import SessionService from '../services/session';
 
 export default class UserController implements Controller {
   public initialize(httpServer: HttpServer): void {
@@ -19,13 +20,29 @@ export default class UserController implements Controller {
       await UserService.createUser(firstName, lastName, emailAddress, password);
       res.send(200);
     });
+
     httpServer.post('/login', async (req: Request, res: Response): Promise<any> => {
-      // const customer = await exampleService.getById(req.params.id);
-      // res.send(customer ? 200 : 404, customer);
+      if (!req.body) {
+        throw new Error();
+      }
+      const {emailAddress, password} = req.body;
+      const existingUser = await UserService.getUserByEmailAddress(emailAddress);
+      if (!existingUser) {
+        throw new Error('UserNotFound');
+      }
+      const passwordCorrect = await UserService.validatePassword(existingUser, password);
+      if (!passwordCorrect) {
+        throw new Error('WrongPassword');
+      }
+      const sessionId = await SessionService.createSessionForUser(existingUser);
+      res.send({
+        sessionId,
+      });
     });
+
     httpServer.post('/logout', async (req: Request, res: Response): Promise<any> => {
-      // const customer = await exampleService.getById(req.params.id);
-      // res.send(customer ? 200 : 404, customer);
+      await SessionService.deleteSession(req);
+      res.send(200);
     });
 
     httpServer.post('/uploadImage', async (req: Request, res: Response): Promise<any> => {

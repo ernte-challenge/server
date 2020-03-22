@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+import * as bcrypt from 'bcrypt';
 const saltRounds = 8;
 
 export function hashText(text: string): Promise<string> {

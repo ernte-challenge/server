@@ -1,16 +1,12 @@
 import {User, UserSession} from '../models';
 import {getRepository} from 'typeorm';
-import {hashText} from '../util/crypt';
+import {hashText, validateText} from '../util/crypt';
 
 export class UserService {
 	public getUserByEmailAddress(emailAddress: string): Promise<User> {
 	  return getRepository(User).findOne({ emailAddress });
 	}
-  // public async getUser(id: string): Promise<User> {
-  //   const user = await getRepository(User).findOne(userId);
-  //   return user;
-  // }
-	//
+
   public async createUser(firstName: string, lastName: string, emailAddress: string, password: string): Promise<User | string> {
 		if (!firstName || !lastName || !emailAddress || !password) {
 			throw new Error('MissingParameter');
@@ -24,6 +20,10 @@ export class UserService {
     const savedUser = await getRepository(User).save(user);
     return savedUser;
   }
+
+	public validatePassword(user: User, password: string): Promise<boolean> {
+		return validateText(password, user.password);
+	}
 	//
   // public async update(user: User): Promise<User> {
   //   const user = await getRepository(User).save(user);

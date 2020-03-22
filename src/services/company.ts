@@ -18,20 +18,20 @@ export class CompanyService {
   //   return company;
   // }
 	//
-  // public async create(company: Company): Promise<Company | string> {
-	// if (company.name == null){
-	// 	return "Name cannot be empty!";
-	// }
-	// if (company.emailAddress == null){
-	// 	return "eMail cannot be empty!";
-	// }
-	// if (company.password == null){
-	// 	return "Password cannot be empty!";
-	// }
-	//
-  //   const company = await getRepository(Company).save(company);
-  //   return company;
-  // }
+  public async create(name: string, phoneNumber: string, emailAddress: string, password: string): Promise<Company | string> {
+	if (!name || !lastName || !phoneNumber || !emailAddress || !password) {
+			throw new Error('MissingParameter');
+	}
+	const cryptedPassword = await hashText(password);
+	const company = new Company();
+	company.name = name;
+	company.phoneNumber = phoneNumber;
+	company.emailAddress = emailAddress;
+	company.password = cryptedPassword;
+    
+	const savedCompany = await getRepository(Company).save(company);
+    return savedCompany;
+  }
 	//
   // public async update(company: Company): Promise<Company> {
   //   const company = await getRepository(Company).save(company);

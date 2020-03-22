@@ -1,7 +1,17 @@
 import {HttpServer} from './httpServer';
-import {RequestHandler, Server as RestifyServer} from 'restify';
+import {RequestHandler, Server as RestifyServer, Request, Response, Next} from 'restify';
 import * as restify from 'restify';
 import {CONTROLLERS} from '../controller';
+
+const ErrorHandler = (requestHandler: Function) => async (req: Request, res: Response, next: Next) => {
+  let handler;
+  try {
+    handler = await requestHandler(req, res, next);
+  } catch (e) {
+    next(e);
+  }
+  return handler;
+}
 
 export class Server implements HttpServer {
   private restify: RestifyServer;
@@ -28,7 +38,8 @@ export class Server implements HttpServer {
   }
 
   private addRoute(method: 'get' | 'post' | 'put' | 'del', url: string, requestHandler: RequestHandler): void {
-    this.restify[method](`${this.prefix}${url}`, requestHandler);
+    const errorRequestHandler = ErrorHandler(requestHandler);
+    this.restify[method](`${this.prefix}${url}`, errorRequestHandler);
   }
 
   public start(port: number): void {

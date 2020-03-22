@@ -8,17 +8,25 @@ export class LocationService {
   //   return location;
   // }
 	//
-  
-  public async create(street: string, zipCode: string, city: string, gpsCoordinates: string): Promise<Location | string> {
-	if (!city || !gpsCoordinates) {
+
+  public async create(name: string, whatToDoSubline: string, usersNeeded: number, payedPerHour: number, bannerImageSrc: string,
+    bannerImageDescription: string, locationPhoneNumber: string, city: string, zipCode: string, houseNumber: string, street: string, gpsCoordinates: string;): Promise<Location | string> {
+	if (!name || !whatToDoSubline || !city || !gpsCoordinates || !usersNeeded) {
 			throw new Error('MissingParameter');
 	}
 	const location = new Location();
-	location.street = street;
-	location.zipCode = zipCode;
-	location.city = city;
+	location.name = name;
+	location.whatToDoSubline = whatToDoSubline;
+	location.usersNeeded = usersNeeded;
+  location.payedPerHour = payedPerHour;
+  location.bannerImageSrc = bannerImageSrc;
+  location.bannerImageDescription = bannerImageDescription;
+  location.locationPhoneNumber = locationPhoneNumber;
+  location.city = city;
+  location.houseNumber = houseNumber;
+  location.street = street;
 	location.gpsCoordinates = gpsCoordinates;
-    
+
 	const savedLocation = await getRepository(Location).save(location);
     return savedLocation;
   }

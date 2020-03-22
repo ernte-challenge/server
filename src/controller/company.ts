@@ -3,11 +3,11 @@ import {HttpServer} from '../server/httpServer';
 import {Request, Response} from 'restify';
 import ImageService from '../services/image';
 
-export default class UserController implements Controller {
+export default class CompanyController implements Controller {
   public initialize(httpServer: HttpServer): void {
-    httpServer.setPrefix('/user');
+    httpServer.setPrefix('/company');
     httpServer.post('/register', async (req: Request, res: Response): Promise<any> => {
-      
+
     });
     httpServer.post('/login', async (req: Request, res: Response): Promise<any> => {
       // const customer = await exampleService.getById(req.params.id);

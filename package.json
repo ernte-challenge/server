@@ -1,0 +1,37 @@
+{
+  "name": "ernte-challenge-server",
+  "version": "1.0.0",
+  "description": "Backend für das Ernte-Challenge-Projekt",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf build && tsc",
+    "start": "nodemon --exec ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernte-challenge/server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ernte-challenge/server/issues"
+  },
+  "homepage": "https://github.com/ernte-challenge/server#readme",
+  "dependencies": {
+    "@types/node": "^13.9.2",
+    "@types/restify": "^8.4.2",
+    "@types/sharp": "^0.24.0",
+    "bcrypt": "^4.0.1",
+    "dotenv": "^8.2.0",
+    "knex": "^0.20.12",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "reflect-metadata": "^0.1.13",
+    "restify": "^8.5.1",
+    "restify-cookies": "^0.2.6",
+    "sharp": "^0.25.2",
+    "ts-node": "^8.7.0",
+    "typeorm": "^0.2.24",
+    "typescript": "^3.8.3"
+  }
+}
